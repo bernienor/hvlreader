@@ -24,7 +24,10 @@ args = parser.parse_args()
 for filename in args.filename:
     data = read_datafile(filename)
     fig = plt.figure()
-    plt.plot(data[:,0],data[:,args.column])
+    ax1 = fig.add_subplot(111)
+    ax1.plot(data[:,0],data[:,args.column])
+    ax1.set_title("Data fra Tektronix skop")
+    ax1.set_xlabel("time")
     plt.show()
 
 
