@@ -1,6 +1,5 @@
 # plotting av data
 
-import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import argparse
@@ -16,8 +15,8 @@ def read_datafile(file_name):
 parser = argparse.ArgumentParser(description='Plotting files stored in CSV-format from a Tektronix scope')
 parser.add_argument('filename', metavar='Filename', type=str, nargs='+',
                    help="The filename you'd like to plot")
-parser.add_argument('inputdata', metavar='Column', type=int,help="Column to display. (1 or higher)", default=1)                   
-parser.add_argument('separator')
+parser.add_argument('--column', default=1, metavar='Column', type=int, help="Column to display. (1 or higher)")                   
+#parser.add_argument('separator', metavar)
 # Vi må prosessere de argumentene som er sendt med programmet
 args = parser.parse_args() 
 
@@ -25,7 +24,7 @@ args = parser.parse_args()
 for filename in args.filename:
     data = read_datafile(filename)
     fig = plt.figure()
-    plt.plot(data[:,0],data[:,args.inputdata])
+    plt.plot(data[:,0],data[:,args.column])
     plt.show()
 
 
