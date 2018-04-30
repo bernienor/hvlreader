@@ -15,11 +15,27 @@
 # * source_file_type (subclass of reader)
 # * file_timestamp (timestamp in the filesystem of the file)
 # * data_timestamp (time and date read from the file)
+# * Source name/brand/identifier
+
+import matplotlib.pyplot as plt
+import numpy as np
 
 
-    class hvlfilereader:
+class hvlfilereader:
+    def __init__(self,filename):
+        self.data = np.loadtxt(filename, delimiter=',', skiprows=16)
+        
 
-    
+class tektronixfile(hvlfilereader):
+    def __init__(self,filename):
+        with open(filename) as file:
+            self.header = [line.rstrip('\n') for line in file]
+        self.header=self.header[:16]
+        self.header = [[line.split(',') for line in self.header] ]
+        self.data = np.loadtxt(filename, delimiter=',', skiprows=16)
+        self.instrumenttype = 'Tektronix oscilioscope'
+        self.model = self.header[0][0][1]
+        self.samplerate = self.header[0][6][1]
 
 
-    data = np.loadtxt(file_name, delimiter=',', skiprows=16)
+
