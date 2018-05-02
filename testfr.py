@@ -4,7 +4,10 @@ import hvlfilereader as fr
 import matplotlib.pyplot as plt
 import numpy as np
 
-f = fr.tektronixfile('../T0003CH1.CSV')
+
+#f = fr.hvlfilereader('../T0003CH1.CSV')
+#f = fr.tektronixfr('../T0003CH1.CSV')
+f = fr.rigolfr('../Rigol_DS1054/20180502_1.csv')
 
 fig = plt.figure()
 ax1 = fig.add_subplot(111)
@@ -17,7 +20,7 @@ plt.show()
 
 #print("Instrument type:",f.instrumenttype)
 #print("Instrument model:", f.model)
-#print("sample rate:",f.samplerate)
+print("sample rate:",f.samplerate)
 
 
 #print(d)
