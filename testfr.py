@@ -11,8 +11,9 @@ f = fr.rigolfr('../Rigol_DS1054/20180502_1.csv')
 
 fig = plt.figure()
 ax1 = fig.add_subplot(111)
+print(f.data)
+print(f.data[0:10,0],f.data[0:10,1])
 ax1.plot(f.data[:,0],f.data[:,1])
-ax1.set_title("Data fra Tektronix skop")
 ax1.set_xlabel("time")
 plt.show()
 
@@ -24,4 +25,5 @@ print("sample rate:",f.samplerate)
 
 
 #print(d)
-
+#data = np.loadtxt('../Rigol_DS1054/20180502_1.csv', delimiter=',', skiprows=2, usecols=0)
+#data = np.loadtxt('../T0003CH1.CSV', delimiter=',', skiprows=16)

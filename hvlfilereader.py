@@ -17,7 +17,6 @@
 # * data_timestamp (time and date read from the file)
 # * Source name/brand/identifier
 
-import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -54,21 +53,19 @@ class tektronixfr(hvlfilereader):
 ''' Rigol oscillioscope file reader
 WORK IN PROGRESS!!!
 '''
-
 class rigolfr(hvlfilereader):
     def __init__(self,filename):
         with open(filename) as file:
             self.header = [line.rstrip('\n') for line in file]
         self.header=self.header[:2]
         self.header = [[line.split(',') for line in self.header] ]
-#        self.instrumenttype = 'Rigol oscilioscope'
-#        self.model = self.header[0][0][1]
-        self.data-length
-        self.samplerate = self.header[0][1][2]
-        self.start = self.header[0][1][1]
-# Trenger å merge de to datasettene på en grei måte.
-#        tidsakse: data = [(-1e-6 + x*1e-7) for x in range(1200)],
-#        amplitude: np.loadtxt(filename, delimiter=',', skiprows=2, usecols=0)
+        self.instrumenttype = 'Rigol oscilioscope'
+        self.samplerate = float(self.header[0][1][2])
+        self.start = float(self.header[0][1][1])
+        ampl = np.loadtxt(filename, delimiter=',', skiprows=2, usecols=0)
+        tstamp=np.array([(self.start + (x * self.samplerate)) for x in range(ampl.size)])
+        
+        self.data=np.vstack((tstamp,ampl))
 
 
 
