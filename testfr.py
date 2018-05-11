@@ -1,13 +1,14 @@
 # testfile for hvlfilereader
-
+# 
+#
 import hvlfilereader as fr
 import matplotlib.pyplot as plt
 import numpy as np
 
 
-#f = fr.hvlfilereader('../T0003CH1.CSV')
-#f = fr.tektronixfr('../T0003CH1.CSV')
-f = fr.rigolfr('../Rigol_DS1054/20180502_1.csv')
+#f = fr.hvlfilereader('testfiles/tektronix_DPO2012B/T0003CH1.CSV')
+#f = fr.tektronixfr('testfiles/tektronix_DPO2012B/T0003CH1.CSV')
+f = fr.rigolfr('testfiles/Rigol_DS1054/20180502_1.csv')
 
 fig = plt.figure()
 ax1 = fig.add_subplot(111)

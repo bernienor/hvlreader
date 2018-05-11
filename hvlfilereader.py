@@ -45,7 +45,7 @@ class tektronixfr(hvlfilereader):
         self.data = np.loadtxt(filename, delimiter=',', skiprows=headersize)
         self.instrumenttype = 'Tektronix oscilioscope'
         self.model = self.header[0][0][1]
-        self.samplerate = self.header[0][6][1]
+        self.samplerate = float(self.header[0][6][1])
 
     def identifyfile(self,filename):
         pass
