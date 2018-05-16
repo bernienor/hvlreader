@@ -21,6 +21,8 @@ import numpy as np
 
 
 class hvlfilereader:
+    """ Generic file reader for various fileformats
+    """
     def __init__(self, filename):
         self.data = np.loadtxt(filename, delimiter=',', skiprows=16)
         self.samplerate = np.round(self.data[:, 0][1] - self.data[:, 0][0],
@@ -31,13 +33,9 @@ class hvlfilereader:
         pass
 
 
-''' Tektronix oscillioscope file reader
-Tested on: * DPO2012B
-
-'''
-
-
 class tektronixfr(hvlfilereader):
+    """ Tektronix oscillioscope file reader tested on: DPO2012B
+    """
     def __init__(self, filename):
         headersize = 16
         with open(filename) as file:
