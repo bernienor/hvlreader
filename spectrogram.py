@@ -19,18 +19,6 @@ fs = 1 / mydata.samplerate
 n = mydata.data.shape[0]
 k = np.arange(n)
 T = n/fs
-frq = k/T # two sides frequency range
-frq = frq[range(int(n/2))] # one side frequency range
-
-# sp = np.fft.rfft(mydata.data[:, 1] )
-
-Y = np.fft.fft(mydata.data[:, 1])/n # fft computing and normalization
-Y = Y[range(int(n/2))]
-
-plt.plot(frq,abs(Y),'r') # plotting the spectrum
-plt.set_xlabel('Freq (Hz)')
-plt.set_ylabel('|Y(freq)|')
-plt.show()
 
 #amp = 2 * np.sqrt(2)
 #noise_power = 0.01 * fs / 2
@@ -41,8 +29,10 @@ plt.show()
 #noise *= np.exp(-time/5)
 #x = carrier + noise
 
-f, t, Sxx = signal.spectrogram(mydata.data[: ,1], fs)
-plt.pcolormesh(t, f, Sxx)
-plt.ylabel('Frequency [Hz]')
-plt.xlabel('Time [sec]')
+f, t, Sxx = signal.spectrogram(mydata.data[: ,1], fs, nperseg=1024, scaling='density')
+fig, ax = plt.subplots()
+ax.pcolormesh(t, f, Sxx)
+ax.ylabel('Frequency [Hz]')
+ax.xlabel('Time [sec]')
+ax.set_ylim(0,1e7)
 plt.show()
