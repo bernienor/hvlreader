@@ -17,7 +17,7 @@ parser.add_argument('--Z', default=0.0, metavar='Z', type=float,
 args = parser.parse_args()
 
 with open(args.filename) as airfoilfile:
-    airfoil = airfoilfile.readlines()[1:]
-    for line in airfoil:
+    next(airfoilfile) #airfoil = airfoilfile.readlines()[1:]
+    for line in airfoilfile:
         data = line.split()
         print(data[0], '\t', data[1], '\t', args.Z)
